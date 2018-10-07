@@ -1,7 +1,7 @@
 <?php
 
 // The main abstract class for the class library
-abstract class Main
+abstract class LotteryCheck
 {
     
     // Method that loads data from the site page
@@ -29,9 +29,7 @@ abstract class Main
     }
     
     // Method for processing the received data (own for each extended class)
-    protected function processData($localDOM)
-    {
-    }
+    abstract protected function processData($localDOM);
     
     // The class constructor calls the appropriate functions to work
     function __construct($url, $jsonfile)
@@ -45,7 +43,7 @@ abstract class Main
 
 
 // Class for processing data received from the ElGordo lottery
-class ElGordo extends Main
+class ElGordo extends LotteryCheck
 {
     
     // Method that redefines work of the same Main class method for ElGordo lottery
@@ -70,7 +68,7 @@ class ElGordo extends Main
 
 
 // Class for processing data received from the Eurojackpot lottery
-class Eurojackpot extends Main
+class Eurojackpot extends LotteryCheck
 {
     
     // Method that redefines work of the same Main class method for Eurojackpot lottery
@@ -101,7 +99,7 @@ class Eurojackpot extends Main
 
 
 // Class for processing data received from the LottoPlus lottery
-class Lotto extends Main
+class Lotto extends LotteryCheck
 {
     
     // Method that redefines work of the same Main class method for LottoPlus lottery
