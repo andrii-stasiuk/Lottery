@@ -4,6 +4,16 @@
 abstract class LotteryCheck
 {
     
+    // The class constructor calls the appropriate functions to work
+    public function __construct($url, $jsonfile)
+    {
+        $html = $this->getInfoFromURL($url);
+        $this->saveResultsToJSON($html, $jsonfile);
+    }
+    
+    // Method for processing the received data (own for each extended class)
+    abstract protected function processData($localDOM);
+    
     // Method that loads data from the site page
     private function getInfoFromURL($localUrl)
     {
@@ -26,16 +36,6 @@ abstract class LotteryCheck
         $encodedString = json_encode($processedData);
         file_put_contents($localJsonFile, $encodedString);
         var_dump($encodedString); // reserved for testing purposes
-    }
-    
-    // Method for processing the received data (own for each extended class)
-    abstract protected function processData($localDOM);
-    
-    // The class constructor calls the appropriate functions to work
-    function __construct($url, $jsonfile)
-    {
-        $html = $this->getInfoFromURL($url);
-        $this->saveResultsToJSON($html, $jsonfile);
     }
     
 }
